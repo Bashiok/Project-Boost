@@ -299,6 +299,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 20.027, y: 0, z: 0}
+--- !u!1 &1536092919 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8059457102095801955, guid: 8f1eb4409078d81438fae38fd7067f90, type: 3}
+  m_PrefabInstance: {fileID: 1855342425190677807}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1536092927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536092919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6496d2d70761dc4b9c2deb0b4e4dacb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1519229878425280442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -354,6 +371,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Start
       objectReference: {fileID: 0}
+    - target: {fileID: 6844660507571742495, guid: 18532b8517e3d674381e23d8845d28f5, type: 3}
+      propertyPath: m_TagString
+      value: Friendly
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18532b8517e3d674381e23d8845d28f5, type: 3}
 --- !u!1001 &1642391893023568254
@@ -368,12 +389,16 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7088048866684047275, guid: 80d12c4ee5163d643a4b308ba487ddb5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10.292
+      objectReference: {fileID: 0}
+    - target: {fileID: 7088048866684047275, guid: 80d12c4ee5163d643a4b308ba487ddb5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7088048866684047275, guid: 80d12c4ee5163d643a4b308ba487ddb5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.15
+      value: 5.0041
       objectReference: {fileID: 0}
     - target: {fileID: 7088048866684047275, guid: 80d12c4ee5163d643a4b308ba487ddb5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -484,6 +509,10 @@ PrefabInstance:
     - target: {fileID: 1211176369588206153, guid: a45238d0680da1f46aed2be3307e1aed, type: 3}
       propertyPath: m_Name
       value: Finishe
+      objectReference: {fileID: 0}
+    - target: {fileID: 1211176369588206153, guid: a45238d0680da1f46aed2be3307e1aed, type: 3}
+      propertyPath: m_TagString
+      value: Finish
       objectReference: {fileID: 0}
     - target: {fileID: 8777573366932348218, guid: a45238d0680da1f46aed2be3307e1aed, type: 3}
       propertyPath: m_RootOrder
