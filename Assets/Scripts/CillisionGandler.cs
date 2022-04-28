@@ -3,6 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class CillisionGandler : MonoBehaviour
 {
+
+    [SerializeField] float nextLevelDelayTiem = 2f;
+    [SerializeField] AudioClip crasheSound;
+    [SerializeField] AudioClip success;
+    AudioSource audioSource;
+
+        // Start is called before the first frame update
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void OnCollisionEnter(Collision other) 
     {
         switch (other.gameObject.tag)
@@ -13,14 +25,29 @@ public class CillisionGandler : MonoBehaviour
 
             case "Finish":
                 Debug.Log("You Hit with Finishe object");
-                LoadNextLevel();
+                NextLevelDelay();
                 break;
             default:
                 Debug.Log("End Game");
-                ReloadLevel();
+                StartCrasheSequence();
                 break;
         }
     }
+
+    void NextLevelDelay()
+    {            
+        GetComponent<Movment>().enabled = false;
+        Invoke("LoadNextLevel", nextLevelDelayTiem);
+        SondNextLevel();
+    }
+
+    void StartCrasheSequence()
+    {
+        GetComponent<Movment>().enabled = false;
+        Invoke("ReloadLevel", nextLevelDelayTiem);
+        SoundCrasheEfect();
+    }
+
     void LoadNextLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -36,5 +63,31 @@ public class CillisionGandler : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
+    }
+    void SoundCrasheEfect()
+    {
+                if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(crasheSound, 0.05f);
+            }
+        
+        else 
+        {
+                audioSource.Stop();
+        }
+
+    }
+    void SondNextLevel()
+    {
+                if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(success, 0.05f);
+            }
+        
+        else 
+        {
+                audioSource.Stop();
+        }
+
     }
 }
