@@ -7,7 +7,13 @@ public class CillisionGandler : MonoBehaviour
     [SerializeField] float nextLevelDelayTiem = 2f;
     [SerializeField] AudioClip crasheSound;
     [SerializeField] AudioClip success;
+
+    [SerializeField] ParticleSystem crasheSoundParticle;
+    [SerializeField] ParticleSystem successParticle;
+
     AudioSource audioSource;
+
+    bool isTransitioning = false;
 
         // Start is called before the first frame update
     void Start()
@@ -17,35 +23,43 @@ public class CillisionGandler : MonoBehaviour
 
     void OnCollisionEnter(Collision other) 
     {
-        switch (other.gameObject.tag)
-        {
-            case "Friendly":
-                Debug.Log("You Hit with Friendly object");
-                break;
+        if (isTransitioning) { return; }
 
-            case "Finish":
-                Debug.Log("You Hit with Finishe object");
-                NextLevelDelay();
-                break;
-            default:
-                Debug.Log("End Game");
-                StartCrasheSequence();
-                break;
-        }
+            switch (other.gameObject.tag)
+            {
+                case "Friendly":
+                    Debug.Log("You Hit with Friendly object");
+                    break;
+
+                case "Finish":
+                    Debug.Log("You Hit with Finishe object");
+                    NextLevelDelay();
+                    break;
+                default:
+                    Debug.Log("End Game");
+                    StartCrasheSequence();
+                    break;
+            }
     }
 
     void NextLevelDelay()
-    {            
+    {          
+        isTransitioning = true;
+        audioSource.Stop();
+        audioSource.PlayOneShot(success, 0.05f);  
         GetComponent<Movment>().enabled = false;
+        successParticle.Play();
         Invoke("LoadNextLevel", nextLevelDelayTiem);
-        SondNextLevel();
     }
 
     void StartCrasheSequence()
     {
+        isTransitioning = true;
+        audioSource.Stop();
+        audioSource.PlayOneShot(crasheSound, 0.05f);
         GetComponent<Movment>().enabled = false;
+        crasheSoundParticle.Play();
         Invoke("ReloadLevel", nextLevelDelayTiem);
-        SoundCrasheEfect();
     }
 
     void LoadNextLevel()
@@ -63,31 +77,5 @@ public class CillisionGandler : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
-    }
-    void SoundCrasheEfect()
-    {
-                if (!audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(crasheSound, 0.05f);
-            }
-        
-        else 
-        {
-                audioSource.Stop();
-        }
-
-    }
-    void SondNextLevel()
-    {
-                if (!audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(success, 0.05f);
-            }
-        
-        else 
-        {
-                audioSource.Stop();
-        }
-
     }
 }
