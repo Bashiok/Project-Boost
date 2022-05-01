@@ -14,6 +14,7 @@ public class CillisionGandler : MonoBehaviour
     AudioSource audioSource;
 
     bool isTransitioning = false;
+    bool coliisionDisabled = false;
 
         // Start is called before the first frame update
     void Start()
@@ -21,9 +22,27 @@ public class CillisionGandler : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    void Update() 
+    {
+        RespondToDebugKeys();
+    }
+
+    void RespondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.L))    
+        {
+            LoadNextLevel();
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            coliisionDisabled = !coliisionDisabled;
+        }
+    }
+
+
     void OnCollisionEnter(Collision other) 
     {
-        if (isTransitioning) { return; }
+        if (isTransitioning || coliisionDisabled) { return; }
 
             switch (other.gameObject.tag)
             {
